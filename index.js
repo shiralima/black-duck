@@ -15,6 +15,7 @@ async function getToken() {
                 'Authorization': `token ${TOKEN}`
             }
         });
+
         return response.data.bearerToken;
     } catch (error) {
         console.error('Error getting token:', error.message);
@@ -28,6 +29,7 @@ async function getProjectDetails(token) {
                 'Authorization': `Bearer ${token}`
             }
         });
+
         console.log('Project Details:', response.data);
     } catch (error) {
         console.error('Error getting project details:', error.message);
@@ -41,6 +43,7 @@ async function getProjectRiskProfile(token) {
                 'Authorization': `Bearer ${token}`
             }
         });
+
         console.log('Project Risk Profile:', response.data);
     } catch (error) {
         console.error('Error getting project risk profile:', error.message);
@@ -54,8 +57,11 @@ async function getProjectComponents(token) {
                 'Authorization': `Bearer ${token}`
             }
         });
-        console.log('Project Components:', response.data);
-        return response.data.items.slice(0, 5);
+
+        const data = response.data.items.slice(0, 3);
+
+        console.log('Project Components:', data);
+        return data;
     } catch (error) {
         console.error('Error getting project components:', error.message);
     }
@@ -68,6 +74,7 @@ async function getComponentVulnerabilities(token, componentId) {
                 'Authorization': `Bearer ${token}`
             }
         });
+
         console.log(`Vulnerabilities for component ${componentId}:`, response.data);
     } catch (error) {
         console.error(`Error getting vulnerabilities for component ${componentId}:`, error.message);
@@ -88,7 +95,7 @@ async function main() {
 
     const components = await getProjectComponents(token);
     if (components) {
-        for (const component of components.slice(0, 2)) {
+        for (const component of components) {
             const componentId = component.component.split("/").pop(); // Get the last part of the url that contain the component id
             await getComponentVulnerabilities(token, componentId);
         }
