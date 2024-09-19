@@ -114,23 +114,29 @@ Fixed data - description, how to fix, how many other vulnerabilities will be fix
 
 ## API References
 
-Get Bearer Token:
+- Get Bearer Token:
+
 POST `/api/tokens/authenticate`
 Authorization Header: `Authorization: token {token}`
 
-Project basic details:
+- Project basic details:
+
 GET `/api/projects/{projectId}/versions/{versionId}`
 
-Project profile - full risk profile via:
+- Project risk profile:
+  
 GET `/api/projects/{projectId}/versions/{versionId}/risk-profile`
 
-List of all components in a specific project:
+- List of all components in a specific project:
+  
 GET `/api/projects/{projectId}/versions/{versionId}/components`
 
-Details about a specific vulnerability (get the id from the request above):
+- Details about a specific vulnerability (get the id from the request above):
+  
 GET `/api/components/{componentId}/vulnerabilities`
 
-Vulnerability affects projects:
+- Vulnerability affects projects:
+  
 GET `/api/vulnerabilities/{vulnerabilityId}/affected-projects`
 
 ## Resources
